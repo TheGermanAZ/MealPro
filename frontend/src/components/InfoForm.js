@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import React from 'react';
 import {
   FormErrorMessage,
@@ -16,6 +16,7 @@ const InfoForm = () => {
   const {
     handleSubmit,
     register,
+    control,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -33,23 +34,41 @@ const InfoForm = () => {
       <Stack maxWidth={1200} margin="auto" spacing={5} marginTop={5}>
         <FormControl as="fieldset">
           <FormLabel as="goals">Fitness Goals?</FormLabel>
-          <RadioGroup {...register('goals')}>
-            <HStack>
-              <Radio value="lose">lose</Radio>
-              <Radio value="maintain">maintain</Radio>
-              <Radio value="gain">gain</Radio>
-            </HStack>
-          </RadioGroup>
+          <Controller
+            name="goals"
+            control={control}
+            defaultValue={false}
+            render={({ field }) => {
+              return (
+                <RadioGroup {...field}>
+                  <HStack>
+                    <Radio value="lose">lose</Radio>
+                    <Radio value="maintain">maintain</Radio>
+                    <Radio value="gain">gain</Radio>
+                  </HStack>
+                </RadioGroup>
+              );
+            }}
+          />
         </FormControl>
         <FormControl as="fieldset">
           <FormLabel as="gender">Gender?</FormLabel>
-          <RadioGroup {...register('gender')}>
-            <HStack>
-              <Radio value="male">male</Radio>
-              <Radio value="female">female</Radio>
-              <Radio value="other">other</Radio>
-            </HStack>
-          </RadioGroup>
+          <Controller
+            name="gender"
+            control={control}
+            defaultValue={false}
+            render={({ field }) => {
+              return (
+                <RadioGroup {...field}>
+                  <HStack>
+                    <Radio value="male">male</Radio>
+                    <Radio value="female">female</Radio>
+                    <Radio value="other">other</Radio>
+                  </HStack>
+                </RadioGroup>
+              );
+            }}
+          />
         </FormControl>
         <FormControl isInvalid={errors.weight}>
           <FormLabel htmlFor="weight">Weight?</FormLabel>
@@ -81,15 +100,24 @@ const InfoForm = () => {
         </FormControl>
         <FormControl as="fieldset">
           <FormLabel as="activity">Activity Level?</FormLabel>
-          <RadioGroup {...register('activity')}>
-            <HStack>
-              <Radio value="0">0</Radio>
-              <Radio value="1">1</Radio>
-              <Radio value="2">2</Radio>
-              <Radio value="3">3</Radio>
-              <Radio value="4">4</Radio>
-            </HStack>
-          </RadioGroup>
+          <Controller
+            name="activity"
+            control={control}
+            defaultValue={false}
+            render={({ field }) => {
+              return (
+                <RadioGroup {...field}>
+                  <HStack>
+                    <Radio value="0">0</Radio>
+                    <Radio value="1">1</Radio>
+                    <Radio value="2">2</Radio>
+                    <Radio value="3">3</Radio>
+                    <Radio value="4">4</Radio>
+                  </HStack>
+                </RadioGroup>
+              );
+            }}
+          />
         </FormControl>
         <FormControl isInvalid={errors.age}>
           <FormLabel htmlFor="age">Age?</FormLabel>
@@ -105,15 +133,24 @@ const InfoForm = () => {
           />
           <FormErrorMessage>{errors.weight?.message}</FormErrorMessage>
         </FormControl>
-        <FormControl>
+        <FormControl as="fieldset">
           <FormLabel as="body">Body Type?</FormLabel>
-          <RadioGroup {...register('body')}>
-            <HStack>
-              <Radio value="mesomorph">Mesomorph</Radio>
-              <Radio value="endomorph">Endomorph</Radio>
-              <Radio value="ectomorph">Ectomorph</Radio>
-            </HStack>
-          </RadioGroup>
+          <Controller
+            name="body"
+            control={control}
+            defaultValue={false}
+            render={({ field }) => {
+              return (
+                <RadioGroup {...field}>
+                  <HStack>
+                    <Radio value="mesomorph">Mesomorph</Radio>
+                    <Radio value="endomorph">Endomorph</Radio>
+                    <Radio value="ectomorph">Ectomorph</Radio>
+                  </HStack>
+                </RadioGroup>
+              );
+            }}
+          />
         </FormControl>
         <Button
           mt={4}
